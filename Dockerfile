@@ -26,3 +26,9 @@ RUN add-apt-repository universe
 RUN add-apt-repository ppa:certbot/certbot
 RUN apt-get update
 RUN apt-get -y install python3-certbot python3-certbot-nginx python3-certbot-dns-digitalocean python3-certbot-dns-route53
+
+# Cloud CLIs
+RUN apt-get -y install awscli
+RUN curl -sL https://github.com/digitalocean/doctl/releases/download/v1.18.0/doctl-1.18.0-linux-amd64.tar.gz | tar -xzv \
+	&& mv doctl /usr/local/bin
+
