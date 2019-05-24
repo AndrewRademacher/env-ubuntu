@@ -1,21 +1,20 @@
 FROM ubuntu:bionic
 CMD /bin/bash
 
-# Sources
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-# Apt Update
-RUN apt update
+RUN apt-get update
 
 # Base Tools
-RUN apt install vim tmux curl wget httpie
+RUN apt-get -y install vim tmux curl wget httpie
 
 # Python Tools
-RUN apt install python3
+RUN apt-get -y install python3 python3-pip
 
 # C++ Tools
-RUN apt install build-essential clang clang-format clang-tidy cmake
+RUN apt-get -y install build-essential clang clang-format clang-tidy cmake
 RUN pip3 install conan
 
 # NodeJS Tools
-RUN apt install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update
+RUN apt-get -y install yarn
